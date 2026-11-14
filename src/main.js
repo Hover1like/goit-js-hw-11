@@ -16,7 +16,10 @@ form.addEventListener("submit", event => {
   const formData = new FormData(form)
   const query = formData.get("search-text").trim()
   if (query === "") {
-    console.log(empty)
+    iziToast.warning({
+      message: "Please enter a search query!",
+      position: "topRight",
+    });
     return
   }
   clearGallery()
@@ -34,7 +37,10 @@ form.addEventListener("submit", event => {
       createGallery(data.hits)
     })
     .catch(error => {
-      console.error(error)
+      iziToast.error({
+        message: "Something went wrong. Please try again!",
+        position: "topRight",
+      });
       })
     .finally(() => {
       hideLoader()
